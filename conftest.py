@@ -3,7 +3,7 @@ from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
 import pytest
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def driver():
     service = Service(GeckoDriverManager().install())
     driver = webdriver.Firefox(service=service)

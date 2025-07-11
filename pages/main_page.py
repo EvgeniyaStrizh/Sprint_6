@@ -2,8 +2,10 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from pages.base_page import BasePage
 
-class MainPage:
+
+class MainPage(BasePage):
     URL = "https://qa-scooter.praktikum-services.ru/"
 
     QUESTIONS = (By.CLASS_NAME, "accordion__button")
@@ -13,10 +15,10 @@ class MainPage:
     LOWER_ORDER_BTN = (By.XPATH, "(//button[text()='Заказать'])[2]")
 
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
 
     def open(self):
-        self.driver.get(self.URL)
+        super().open(self.URL)
 
     def click_question(self, index):
         question = WebDriverWait(self.driver, 10).until(
@@ -45,7 +47,7 @@ class MainPage:
             WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(button)).click()
 
     def click_logo_scooter(self):
-        self.driver.find_element(*self.LOGO_SCOOTER).click()
+        self.click(*self.LOGO_SCOOTER)
 
     def click_logo_yandex(self):
-        self.driver.find_element(*self.LOGO_YANDEX).click()
+        self.click(*self.LOGO_YANDEX)
