@@ -29,6 +29,7 @@ class OrderPage(BasePage):
     def open(self):
         super().open(self.URL)
 
+    @allure.step("Заполнить персональную информаицю")
     def fill_personal_info(self, name, surname, address, station, phone):
         self.send_keys(*self.NAME, name)
         self.send_keys(*self.SURNAME, surname)
@@ -38,6 +39,7 @@ class OrderPage(BasePage):
         self.driver.find_element(*self.PHONE).send_keys(phone)
         self.click(*self.NEXT_BTN)
 
+    @allure.step("Заполнить информацию о заказе")
     def fill_order_info(self, date, comment):
         self.send_keys(*self.DATE, date)
         self.click(*self.HEADING)

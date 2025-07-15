@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
+import allure
 
 
 class MainPage(BasePage):
@@ -17,9 +18,11 @@ class MainPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    @allure.step("Отркыть главную страницу")
     def open(self):
         super().open(self.URL)
 
+    @allure.step("Кликнуть на вопрос с индексом {index}")
     def click_question(self, index):
         question = WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.ID, f"accordion__heading-{index}"))
@@ -36,6 +39,7 @@ class MainPage(BasePage):
         )
         return answer.text
 
+    @allure.step("Нажать на кнопку Заказать")
     def click_order_button(self, position='top'):
         button = self.UPPER_ORDER_BTN if position == 'top' else self.LOWER_ORDER_BTN
         if button is self.LOWER_ORDER_BTN:
